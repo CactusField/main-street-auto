@@ -30,6 +30,8 @@ class App extends Component {
 
   getVehicles() {
     // axios (GET)
+
+    axios.get('http://joes-autos.herokuapp.com/api/vehicles').then(res =>this.setState({vehiclesToDisplay: res.data.vehicles})).catch(err => toast.error('cannot find carrs'))
     // setState with response -> vehiclesToDisplay
   }
 
@@ -60,6 +62,8 @@ class App extends Component {
   updatePrice(priceChange, id) {
     // axios (PUT)
     // setState with response -> vehiclesToDisplay
+
+    axios.put(`https://joes-autos.herokuapp.com/api/vehicles/${id}/${priceChange}`).then(res => console.log(res.data)).catch( _ => toast.errorerror("pee"))
   }
 
   addCar() {
@@ -70,6 +74,7 @@ class App extends Component {
       year: this.year.value,
       price: this.price.value,
     }
+    axios.post('https://joes-autos.herokuapp.com/api/vehicles', newCar).then(res=>this.setState({vehiclesToDisplay: res.data.vehicles}))
 
     // axios (POST)
     // setState with response -> vehiclesToDisplay
